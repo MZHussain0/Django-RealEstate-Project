@@ -7,18 +7,19 @@
     <div class="container">
         <div class="row text-center">
             <div class="col-md-12">
-                <form action="search.html">
+                <form action="{% url 'search' %}">
                     <!-- Form Row 1 -->
                     <div class="form-row">
                         <div class="col-md-4 mb-3">
                             <label class="sr-only">Keywords</label>
                             <input type="text" name="keywords" class="form-control"
-                                placeholder="Keyword (Pool, Garage, etc)">
+                                placeholder="Keyword (Pool, Garage, etc)" value="{{ values.keywords }}">
                         </div>
 
                         <div class="col-md-4 mb-3">
                             <label class="sr-only">City</label>
-                            <input type="text" name="city" class="form-control" placeholder="Hyderabad">
+                            <input type="text" name="city" class="form-control" placeholder="Hyderabad"
+                                value="{{ values.city }}">
                         </div>
 
                         <div class="col-md-4 mb-3">
@@ -26,7 +27,8 @@
                             <select name="state" class="form-control">
                                 <option selected="true" disabled="disabled">Localities (All)</option>
                                 {% for key,value in state_choices.items %}
-                                <option value="{{ key }}">{{ value }}</option>
+                                <option value="{{ key }}" {% if key == values.state %} selected {% endif %}>{{ value }}
+                                </option>
                                 {% endfor %}
                             </select>
                         </div>
@@ -38,7 +40,9 @@
                             <select name="bedrooms" class="form-control">
                                 <option selected="true" disabled="disabled">Bedrooms (Any)</option>
                                 {% for key,value in bedroom_choices.items %}
-                                <option value="{{ key }}">{{ value }}</option>
+                                <option value="{{ key }}" {% if key == values.bedrooms %} selected {% endif %}>
+                                    {{ value }}
+                                </option>
                                 {% endfor %}
                             </select>
                         </div>
@@ -46,7 +50,8 @@
                             <select name="price" class="form-control">
                                 <option selected="true" disabled="disabled">Max Price (All)</option>
                                 {% for key,value in price_choices.items %}
-                                <option value="{{ key }}">{{ value }}</option>
+                                <option value="{{ key }}" {% if key == values.price %} selected {% endif %}>{{ value }}
+                                </option>
                                 {% endfor %}
                             </select>
                         </div>
